@@ -2,4 +2,4 @@ langchain
 python-dotenv
 langchain_groq
 langchain_community
-python-telegram-bot
+python-telegram-bot==20.3
