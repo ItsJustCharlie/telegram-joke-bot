@@ -37,10 +37,12 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Mention me with a topic like '@TellMeJokeBot python', to get some funny jokes")
 
 async def generate_joke(update: Update, context: ContextTypes.DEFAULT_TYPE, topic: str):
-    if update.message:
-        await update.message.reply_text(f"Generating a joke about {topic}")
-        joke = setup_llm_chain(topic).invoke({}).strip()
-        await update.message.reply_text(joke)
+    if update.message is None:
+        return  # Just skip if no message
+
+    await update.message.reply_text(f"Generating a joke about {topic}")
+    joke = setup_llm_chain(topic).invoke({}).strip()
+    await update.message.reply_text(joke)
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message:
